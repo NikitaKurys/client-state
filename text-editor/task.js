@@ -1,18 +1,16 @@
-const editor = document.getElementById('editor');
-const clear = document.getElementById('clear');
+let dataText = document.getElementById("editor");
 
-window.addEventListener('load', function() { 
-    if (localStorage.text) {
-        editor.value = localStorage.getItem('text');
-    }
-        editor.addEventListener('input', function() {
-            localStorage.setItem('text', editor.value);
-        });    
-});
+let previousText = localStorage.getItem("dataText");
 
-clear.addEventListener('click', function(event) {
-    event.preventDefault();    
-    localStorage.removeItem('text'); 
-    localStorage.clear();
-    editor.value = '';    
+dataText.value = previousText;
+
+dataText.addEventListener("keyup", dataText_OnKeyUp);
+
+function dataText_OnKeyUp(e) {
+	localStorage.setItem("dataText", this.value);
+}
+
+clearBtn.addEventListener("click", function () {
+	dataText.value = "";
+	localStorage.removeItem("dataText");
 });
